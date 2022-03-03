@@ -8,4 +8,10 @@ const darkTheme = createTheme({
   },
 });
 
-export { darkTheme };
+const lightTheme = createTheme({
+  palette: {
+    mode: "light",
+  },
+});
+
+export { darkTheme, lightTheme };

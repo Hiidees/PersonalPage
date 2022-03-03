@@ -1,16 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import RouteProvider from "./RouteProvider";
-import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
-import { darkTheme } from "./Services/ThemeService";
+import { ThemeUIStoreProvider } from "./Stores/UIStores/ThemeUIStore";
 
 ReactDOM.render(
   <React.StrictMode>
-    <ThemeProvider theme={darkTheme}>
+    <ThemeUIStoreProvider>
       <CssBaseline />
       <RouteProvider />
-    </ThemeProvider>
+    </ThemeUIStoreProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );
