@@ -13,9 +13,10 @@ export function Home() {
 
   const themeUIStore = useThemeUIStore();
 
-  function switchTheme() {
-
-    const themeToSet = themeUIStore.themeKind == ThemeKind.Light ? ThemeKind.Dark : ThemeKind.Light;
+  function onSwitchTheme() { // We should move this method on controller
+    const themeToSet = themeUIStore.themeKind == ThemeKind.Light 
+      ? ThemeKind.Dark 
+      : ThemeKind.Light;
 
     themeUIStore.setTheme(themeToSet)
   }
@@ -28,7 +29,7 @@ export function Home() {
         justifyContent="center"
         sx={{ height: height }}
       >
-        <Button variant="text" color="error" onClick={switchTheme}>
+        <Button variant="text" color="error" onClick={onSwitchTheme}>
           Press Start
         </Button>
       </Box>
