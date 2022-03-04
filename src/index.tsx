@@ -2,14 +2,14 @@ import React from "react";
 import ReactDOM from "react-dom";
 import RouteProvider from "./RouteProvider";
 import CssBaseline from "@mui/material/CssBaseline";
-import { ThemeUIStoreProvider } from "./Stores/UIStores/ThemeUIStore";
+import { AppThemeProvider } from "./Stores/UIStores/AppThemeUIStore";
 
 ReactDOM.render(
   <React.StrictMode>
-    <ThemeUIStoreProvider>
+    <AppThemeProvider>
       <CssBaseline />
       <RouteProvider />
-    </ThemeUIStoreProvider>
+    </AppThemeProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );

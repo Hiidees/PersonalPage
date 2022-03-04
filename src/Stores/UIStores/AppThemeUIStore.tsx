@@ -1,13 +1,14 @@
 import { ThemeProvider } from "@emotion/react";
-import { Theme } from "@mui/material/styles/createTheme";
+import createTheme, {
+  Theme,
+  ThemeOptions,
+} from "@mui/material/styles/createTheme";
 import React, { useContext, useReducer } from "react";
 import { createContext } from "react";
-import { darkTheme, lightTheme } from "../../Services/ThemeService";
+import { ThemeKind } from "../../Enums/ThemeKind";
+import * as DarkTheme from "../Data/Themes/DarkTheme.json";
+import * as LightTheme from "../Data/Themes/LightTheme.json";
 
-export enum ThemeKind {
-  Dark,
-  Light
-}
 interface IStore {
   theme: Theme;
   themeKind: ThemeKind;
@@ -20,7 +21,7 @@ interface IState {
   themeKind: ThemeKind;
 }
 enum ActionKind {
-  SetTheme
+  SetTheme,
 }
 interface IAction {
   type: ActionKind;
@@ -29,12 +30,14 @@ interface IAction {
 function reducer(state: IState, action: IAction): IState {
   const { type, payload } = action;
 
-  switch (type) {
+  switch (
+    type //Dark OR Light
+  ) {
     case ActionKind.SetTheme:
       return {
         ...state,
         theme: payload.theme,
-        themeKind: payload.themeKind
+        themeKind: payload.themeKind,
       };
 
     default:
@@ -42,22 +45,25 @@ function reducer(state: IState, action: IAction): IState {
   }
 }
 
-interface IProviderProps {
-}
-function ThemeUIStoreProvider(props: React.PropsWithChildren<IProviderProps>) {
+interface IProviderProps {}
+
+function AppThemeProvider(props: React.PropsWithChildren<IProviderProps>) {
   const { children } = props;
-  
-  const initialState: IStore = { // We should take initial state from cookies/local storage
+
+  const darkTheme = createTheme(DarkTheme as ThemeOptions);
+  const lightTheme = createTheme(LightTheme as ThemeOptions);
+
+  const initialState: IStore = {
+    // We should take initial state from cookies/local storage
     theme: darkTheme,
     themeKind: ThemeKind.Dark,
-    setTheme: setTheme
+    setTheme: setTheme,
   };
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  function setTheme(themeKind: ThemeKind) : void {
-
+  function setTheme(themeKind: ThemeKind): void {
     let theme = darkTheme;
-    switch(themeKind) {
+    switch (themeKind) {
       case ThemeKind.Dark:
         theme = darkTheme;
         break;
@@ -70,25 +76,27 @@ function ThemeUIStoreProvider(props: React.PropsWithChildren<IProviderProps>) {
       type: ActionKind.SetTheme,
       payload: {
         theme: theme,
-        themeKind: themeKind
-      }
+        themeKind: themeKind,
+      },
     };
-    dispatch(action)
+    dispatch(action);
   }
 
   return (
-    <Context.Provider value={{
-      theme: state.theme,
-      themeKind: state.themeKind,
-      setTheme: setTheme
-    }}>
+    <Context.Provider
+      value={{
+        theme: state.theme,
+        themeKind: state.themeKind,
+        setTheme: setTheme,
+      }}
+    >
       <ThemeProvider theme={state.theme}>{children}</ThemeProvider>
     </Context.Provider>
   );
-};
+}
 
-function useThemeUIStore() {
+function useAppTheme() {
   return useContext(Context);
 }
 
-export { ThemeUIStoreProvider, useThemeUIStore };
+export { AppThemeProvider, useAppTheme };
