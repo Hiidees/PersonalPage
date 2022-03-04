@@ -32,11 +32,7 @@ export function Home() {
         justifyContent="center"
         sx={{ height: height }}
       >
-        <Button
-          variant="text"
-          sx={{ backgroundColor: "black", color: "white" }}
-          onClick={onSwitchTheme}
-        >
+        <Button variant="contained" onClick={onSwitchTheme}>
           Press Start
         </Button>
       </Box>
