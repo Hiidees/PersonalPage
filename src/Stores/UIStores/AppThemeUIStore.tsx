@@ -15,14 +15,14 @@ import GlobalStyles from "@mui/material/GlobalStyles";
 interface IStore {
   theme: Theme;
   themeKind: ThemeKind;
-  globalStyles: Interpolation<Theme>;
+  globalStyles?: Interpolation<Theme>;
   setTheme: (themeKind: ThemeKind) => void;
 }
 const Context = createContext<IStore>({} as IStore);
 
 interface IState {
   theme: Theme;
-  globalStyles: Interpolation<Theme>;
+  globalStyles?: Interpolation<Theme>;
   themeKind: ThemeKind;
 }
 
