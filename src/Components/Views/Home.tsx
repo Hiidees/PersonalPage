@@ -2,8 +2,8 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import { useState } from "react";
-import { ThemeKind } from "../Enums/ThemeKind";
-import { useAppTheme } from "../Stores/UIStores/AppThemeUIStore";
+import { AppThemeKind } from "../../Domains/Enums/AppThemeEnums";
+import useAppTheme from "../../Hooks/useAppTheme";
 
 export function Home() {
   const [height, setHeight] = useState(window.innerHeight);
@@ -17,9 +17,9 @@ export function Home() {
   function onSwitchTheme() {
     // We should move this method on controller
     const themeToSet =
-      themeUIStore.themeKind === ThemeKind.Light
-        ? ThemeKind.Dark
-        : ThemeKind.Light;
+      themeUIStore.themeKind === AppThemeKind.Light
+        ? AppThemeKind.Dark
+        : AppThemeKind.Light;
 
     themeUIStore.setTheme(themeToSet);
   }

@@ -1,8 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import RouteProvider from "./RouteProvider";
+import RouteProvider from "./Router";
 import CssBaseline from "@mui/material/CssBaseline";
-import { AppThemeProvider } from "./Stores/UIStores/AppThemeUIStore";
+import { AppThemeProvider } from "./Components/Providers/AppThemeProvider";
 
 ReactDOM.render(
   <React.StrictMode>
